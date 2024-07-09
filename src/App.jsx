@@ -13,6 +13,7 @@ import {
 /* importaciones */
 import Inicio from "./Inicio"
 import Destacados from "./Destacados"
+import BarraNavegacion from "./fragments/BarraNavegacion"
 
 /* component: view */
 function App() {
@@ -28,22 +29,10 @@ function App() {
     <>
         <Container>
           <Row>
-            <Col md="12" xs="12">
-              <Nav pills className="mt-2">
-                <NavItem>
-                  {/* cambio de valor de estado por función anónima */}
-                  <NavLink href="#" onClick={() => setMenu('inicio')}>
-                    Inicio
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  {/* cambio de valor de estado por función normal */}
-                  <NavLink href="#" onClick={handleChangeMenuDestacado}>
-                    Destacados
-                  </NavLink>
-                </NavItem>
-              </Nav>
-            </Col>
+            <BarraNavegacion
+                setMenu={setMenu}
+                handleChangeMenuDestacado={handleChangeMenuDestacado}
+            />
           </Row>
 
           <Row className="mt-2">
