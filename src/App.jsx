@@ -1,6 +1,3 @@
-
-
-
 /* core */
 import { useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -14,10 +11,19 @@ import {
 } from "reactstrap"
 
 /* importaciones */
-import ContenidoInicioFragment from "./fragments/ContenidoInicioFragment"
+import Inicio from "./Inicio"
+import Destacados from "./Destacados"
 
 /* component: view */
 function App() {
+  const [menu, setMenu] = useState('inicio') // 'inicio' - 'destacados'
+
+  // function handleChangeMenuDestacado() { }
+  const handleChangeMenuDestacado = () => {
+    // menu = 'destacado' //  mal*
+    setMenu('destacado')
+  }
+
   return (
     <>
         <Container>
@@ -25,16 +31,15 @@ function App() {
             <Col md="12" xs="12">
               <Nav pills className="mt-2">
                 <NavItem>
-                  <NavLink
-                      active
-                      href="#"
-                  >
-                    Link
+                  {/* cambio de valor de estado por función anónima */}
+                  <NavLink href="#" onClick={() => setMenu('inicio')}>
+                    Inicio
                   </NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink href="#">
-                    Link
+                  {/* cambio de valor de estado por función normal */}
+                  <NavLink href="#" onClick={handleChangeMenuDestacado}>
+                    Destacados
                   </NavLink>
                 </NavItem>
               </Nav>
@@ -42,11 +47,17 @@ function App() {
           </Row>
 
           <Row className="mt-2">
-            <Col md="12" xs="12">
-              {/* Añadir una card pero como fragmento */}
-              {/* ContenidoInicioFragment.jsx */}
-              <ContenidoInicioFragment />
-            </Col>
+            {/* condition rendering */}
+            {menu === 'inicio' &&
+              <>
+                <Inicio />
+              </>
+            }
+            {menu === 'destacados' &&
+              <>
+                <Destacados />
+              </>
+            }
           </Row>
         </Container>
     </>
